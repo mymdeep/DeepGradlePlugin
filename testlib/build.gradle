@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+// 引用插件
+
+apply plugin: 'adeep.library'
+android {
+    compileSdkVersion 26
+    buildToolsVersion "27.0.3"
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+deep {
+
+           aar{
+               name "{name}_{type}_{flavor}_deep.aar"
+               path "../out/aar"
+               holder= [aaa:123,bbb:666]
+           }
+    jar{
+                name "{name}_{type}_{flavor}_deep.jar"
+                path "../out/jar"
+                excludeClass=['com/deep/test/exclude.class']
+                excludePackage=['exclude']
+                isProguard true
+
+                includeJar = ["libs/open_sdk_r5923_lite.jar"]
+            }
+   }
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
+//    implementation project(':time_lib')
+}
