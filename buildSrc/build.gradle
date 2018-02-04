@@ -1,16 +1,5 @@
 apply plugin: 'groovy'
-//buildscript {
-//    repositories {
-//        jcenter()
-//    }
-//    dependencies {
-//        classpath 'com.android.tools.build:gradle:2.3.3'
-//
-//
-//        // NOTE: Do not place your application dependencies here; they belong
-//        // in the individual module build.gradle files
-//    }
-//}
+
 dependencies {
     compile gradleApi()
     compile localGroovy()
@@ -18,105 +7,95 @@ dependencies {
 
 
 }
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
 
-//ext {
-//    siteUrl = 'https://github.com/mymdeep/deepudp'
-//    gitUrl = 'https://github.com/mymdeep/deepudp.git'
-//    group = "com.test"
-//    version = "1.0"
-//    id = 'mymdeep'
-//    name = 'wangfei'
-//    email =  'mymdeep@vip.qq.com'
-//    packaging = 'aar'
-//
-//}
-//apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.jfrog.bintray'
-////项目主页
-//def libname = 'testg'
-//def libdesc = 'testg' //描述
-//group = rootProject.ext.group
-//version = rootProject.ext.version
-//
-////生成源文件
-////task sourcesJar(type: Jar) {
-////    from android.sourceSets.main.java.srcDirs
-////    classifier = 'sources'
-////}
-////生成文档
-////task javadoc(type: Javadoc) {
-////    source = android.sourceSets.main.java.srcDirs
-////    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-////    options.encoding "UTF-8"
-////    options.charSet 'UTF-8'
-////    options.author true
-////    options.version true
-//////    options.links "https://github.com/linglongxin24/FastDev/tree/master/mylibrary/docs/javadoc"
-////    failOnError false
-////}
-//
-////文档打包成jar
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
-////拷贝javadoc文件
-//task copyDoc(type: Copy) {
-//    from "${buildDir}/docs/"
-//    into "docs"
-//}
-//
-////上传到jcenter所需要的源码文件
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'//2.1.2对应1.3
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0"
+    }
+}
+ext {
+    siteUrl = 'https://github.com/mymdeep/xxx'
+    gitUrl = 'https://github.com/mymdeep/xxx.git'
+    group = "com.deep"
+    version = "1.0.2"
+    id = 'mymdeep'
+    name = 'wangfei'
+    email =  'mymdeep@vip.qq.com'
+    packaging = 'aar'
+
+}
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+//项目主页
+def libname = 'deepgradle'
+def libdesc = 'easy gradle' //描述
+group = rootProject.ext.group
+version = rootProject.ext.version
+
+
+
+
+
+//上传到jcenter所需要的源码文件
 //artifacts {
-////    archives javadocJar
-////    archives sourcesJar
+//    archives javadocJar
+//    archives sourcesJar
 //}
-//
-//// 配置maven库，生成POM.xml文件
-//install {
-//    repositories.mavenInstaller {
-//        // This generates POM.xml with proper parameters
-//        pom {
-//            project {
+
+// 配置maven库，生成POM.xml文件
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
 //                packaging rootProject.ext.packaging
-//                name libname
-//                url siteUrl
-//                licenses {
-//                    license {
-//                        name libname
-//                        url rootProject.ext.siteUrl
-//                    }
-//                }
-//                developers {
-//                    developer {
-//                        id rootProject.ext.id
-//                        name rootProject.ext.name
-//                        email rootProject.ext.email
-//                    }
-//                }
-//                scm {
-//                    connection rootProject.ext.gitUrl
-//                    developerConnection rootProject.ext.gitUrl
-//                    url rootProject.ext.siteUrl
-//                }
-//            }
-//        }
-//    }
-//}
-//
-////上传到jcenter
-//
-//bintray {
-//    user = "mymdeep"    //读取 local.properties 文件里面的 bintray.user
-//    key ="51f8c12b5051457414daad0a598259afc56f48d4"  //读取 local.properties 文件里面的 bintray.apikey
-//    configurations = ['archives']
-//    pkg {
-//        repo = "maven"
-//        name = libname    //发布到JCenter上的项目名字，必须填写
-//        desc = libdesc    //项目描述
-//        websiteUrl = rootProject.ext.siteUrl
-//        vcsUrl = rootProject.ext.gitUrl
-//        licenses = ["Apache-2.0"]
-//        publish = true
-//    }
-//}
+                name libname
+                url siteUrl
+                licenses {
+                    license {
+                        name libname
+                        url rootProject.ext.siteUrl
+                    }
+                }
+                developers {
+                    developer {
+                        id rootProject.ext.id
+                        name rootProject.ext.name
+                        email rootProject.ext.email
+                    }
+                }
+                scm {
+                    connection rootProject.ext.gitUrl
+                    developerConnection rootProject.ext.gitUrl
+                    url rootProject.ext.siteUrl
+                }
+            }
+        }
+    }
+}
+
+//上传到jcenter
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("BINTRAY_USER")    //读取 local.properties 文件里面的 bintray.user
+    key = properties.getProperty("BINTRAY_KEY")   //读取 local.properties 文件里面的 bintray.apikey
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = libname    //发布到JCenter上的项目名字，必须填写
+        desc = libdesc    //项目描述
+        websiteUrl = rootProject.ext.siteUrl
+        vcsUrl = rootProject.ext.gitUrl
+        licenses = ["Apache-2.0"]
+        labels = ['gradle', 'plugin']
+        publish = true
+    }
+}

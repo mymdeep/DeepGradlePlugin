@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'deep.app'
+apply plugin: 'deep.app'
 
 android {
     compileSdkVersion 26
@@ -28,12 +28,12 @@ android {
 
     }
 }
-//deep{
-//    name "{name}_{type}_{flavor}_deep.apk"
-//    path "../out"
-//    holder= [aaa:123,bbb:666]
-//
-//}
+deep{
+    name "{name}_{type}_{flavor}_deep.apk"
+    path "../out"
+    holder= [aaa:123,bbb:666]
+
+}
 //gradle.useLogger(new DeepLogger(true))
 //gradle.addListener(new DeepTimeListener(false))
 dependencies {
@@ -44,5 +44,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-//    implementation project(':time_lib')
+    //    implementation project(':time_lib')
+//    implementation project(':deep_gradle')
 }

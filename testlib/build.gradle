@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 // 引用插件
 
-apply plugin: 'adeep.library'
+apply plugin: 'deep.library'
 android {
     compileSdkVersion 26
     buildToolsVersion "27.0.3"

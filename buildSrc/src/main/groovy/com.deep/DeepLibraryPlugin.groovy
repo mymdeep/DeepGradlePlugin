@@ -140,11 +140,22 @@ def controlJar(JarExtension extension,Project project){
         }
         if (needDefaultProguard){
             proguardJar.dependsOn dJar
-            def compile = project.tasks.getByName("assembleDebug")
+            def compile
+            if (project.tasks.getByName("assembleDebug")){
+                compile = project.tasks.getByName("assembleDebug")
+            }else {
+                compile = project.tasks.getByName("assembleRelease")
+            }
             compile.dependsOn proguardJar
         }
-        else{ proguardJar.dependsOn dJar
-            def compile = project.tasks.getByName("assembleDebug")
+        else{
+            proguardJar.dependsOn dJar
+            def compile
+            if (project.tasks.getByName("assembleDebug")){
+                compile = project.tasks.getByName("assembleDebug")
+            }else {
+                compile = project.tasks.getByName("assembleRelease")
+            }
             compile.dependsOn dJar
         }
 
