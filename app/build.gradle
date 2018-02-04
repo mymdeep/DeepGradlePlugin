@@ -1,3 +1,6 @@
+import com.deep.DeepLogger
+import com.deep.DeepTimeListener
+
 apply plugin: 'com.android.application'
 apply plugin: 'deep.app'
 
@@ -34,8 +37,8 @@ deep{
     holder= [aaa:123,bbb:666]
 
 }
-//gradle.useLogger(new DeepLogger(true))
-//gradle.addListener(new DeepTimeListener(false))
+gradle.useLogger(new DeepLogger(true))
+gradle.addListener(new DeepTimeListener(true))
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

@@ -109,7 +109,12 @@ def controlJar(JarExtension extension,Project project){
                 aName =  aName.replace("{name}",project.name)
                 aName =  aName.replace("{type}",variant.getBuildType().getName())
                 aName = aName.replace("{flavor}",variant.getFlavorName())
-                dJar.archiveName = "source"+aName
+                if (needDefaultProguard){
+                    dJar.archiveName = "source"+aName
+                }else {
+                    dJar.archiveName = aName
+                }
+
                dJar.setDestinationDir(new File("${project.getProjectDir().absolutePath}/${path}/"))
             }
         }
